@@ -44,7 +44,7 @@ useEffect(() => {
        <>
        <tr>
          <td>{wishlist.status}</td>
-         <td><img src={wishlist.Imgsrc} alt="" /></td>
+         <td>{wishlist.product_name}</td>
          <td>{wishlist.price}</td>
          <td>
            {wishlist.offer_price}
