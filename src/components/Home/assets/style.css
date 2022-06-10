@@ -1,0 +1,36 @@
+body{
+    overflow-x: hidden;
+}
+div::-webkit-scrollbar {
+    display: none;
+}
+.fontstyle{
+    font-family: 'Macondo', cursive;
+}
+
+.imagehover{
+  transition:  transform .2s;    
+}
+
+.imagehover:hover{
+  transform: scale(1.02);
+}
+
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+/* .hideelement{
+  display: none;
+}
+ .cardproduct:hover .hideelement{
+   display: flex;
+   z-index: 47587;
+ } */

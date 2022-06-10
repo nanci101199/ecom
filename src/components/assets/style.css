@@ -1,0 +1,32 @@
+.css-1gsv261 {
+    border-bottom: 0px solid!important;
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    /* color: #1976d2; */
+    background-color: white;
+}
+
+.css-1orzy9s {
+    position: relative;
+    background-color: rgba(227, 206, 206, 0.15)!important;
+    margin-left: 0;
+    border-radius: 22px;
+    width: 100%;
+}
+
+/* body{
+    background-image: linear-gradient(to right, rgb(255,19,20), rgb(255,127,8));
+} */
+
+a {
+    color: black!important;
+    text-decoration: none;
+}
+div::-webkit-scrollbar {
+    display: none;
+}
+.css-13xfq8m-MuiTabPanel-root {
+    padding: 17px!important;
+}
