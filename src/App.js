@@ -25,6 +25,7 @@ import Mychat from './components/Profile/Mychat';
 import {servepratham} from './config/AppConfig'
 import axios from 'axios';
 import AddtoCart from './components/Profile/AddtoCart';
+import Productdetails from './components/Productdetails';
 
 function App() {
 
@@ -67,6 +68,7 @@ function App() {
         <Route path='/account' element={<Myaccount/>}/>
         <Route path='/chat' element={<Mychat/>}/>
         <Route path='/addtocart' element={<AddtoCart/>} />
+        <Route path='/productdetail' element={<Productdetails/>} />
       </Routes>
       <Footer/> 
     </>

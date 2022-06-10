@@ -14,6 +14,7 @@ import Buttons from './Home/Buttons'
 import Trandingproduct from './Home/Trandingproduct'
 import Topproducts from './Home/Topproducts'
 import {servepratham} from '../config/AppConfig'
+import Featureproduct from './Home/Featureproduct'
 
 function Home() {
 
@@ -39,7 +40,8 @@ useEffect(() => {
         <Poster/>
         <Shopbycategory/>
         {/* <Dailydrops/> */}
-        <Productcarousels  />
+        {/* <Productcarousels  /> */}
+        <Featureproduct/>
         <Trandingproduct />
         <Topproducts/>
         <Sheincampign/>

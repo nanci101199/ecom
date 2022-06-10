@@ -98,18 +98,20 @@ function Header({ headdata }) {
             <div className='' style={{ width: "99%" }}>
                 <div className=' row bg-light' >
                     <div className=' col-lg-2 col-12 fs-1 fw-bold text-center'> <Link to='/home'> SHEIN </Link> </div>
-                    <div className=' col-7 m-auto my-2' style={{ flexWrap: "nowrap", overflow: "scroll" }}>
+                    <div className=' col-lg-7 col-12 m-auto my-2 justify-content-center' style={{ flexWrap: "nowrap", overflow: "scroll" }}>
                         <Box sx={{ width: '100%', typography: 'body1' }}>
                             <TabContext value={value} style={{}}>
                                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                    <div className='justify-content-center'>
                                     <TabList aria-label="lab API tabs example">
                                         {headdata?.map((data) => (
                                             <Tab onClick={() => handleclick(data.id)} label={data.name} value={data.id} />
                                         ))}
 
                                     </TabList>
+                                    </div>
                                 </Box>
-                                <div className='d-flex w-auto' style={{ flexWrap: "nowrap", overflow: "scroll" }}>
+                                <div className='d-flex w-auto justify-content-center' style={{ flexWrap: "nowrap", overflow: "scroll" }}>
                                     {headdata?.map((data) => (
                                         data.id == value ?
                                             data.childrens.map((childdata) => (
@@ -120,7 +122,7 @@ function Header({ headdata }) {
                         </Box>
                     </div>
 
-                    <div className='col-lg-3 col-12 text-lg-end text-center my-auto d-flex justify-content-end mr-3'>
+                    <div className='col-lg-3 col-12 text-lg-end text-center my-auto d-flex justify-content-lg-end justify-content-center mr-3'>
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <div onClick={handleOpenUserMenu} className='mx-1'><PersonOutlineIcon /></div>

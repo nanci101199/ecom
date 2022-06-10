@@ -83,7 +83,7 @@ function Login() {
         sessionStorage.setItem("id",response.data.data.user.id )
         sessionStorage.setItem("user_role",response.data.data.user.user_role )
         sessionStorage.setItem("vendor_type",response.data.data.vendor_type )
-        
+        console.log(response)
       })       
     }
   const otpevent = async () => {
@@ -100,10 +100,10 @@ function Login() {
         sessionStorage.setItem("accesstoken", access_tokens)
         sessionStorage.setItem("data",response.data.data.user.username )
         sessionStorage.setItem("user_image",response.data.data.user.profile )
-        sessionStorage.setItem("id",response.data.data.user.id )
+        sessionStorage.setItem("user_id",response.data.data.user.id )
         sessionStorage.setItem("user_role",response.data.data.user.user_role )
         sessionStorage.setItem("vendor_type",response.data.data.vendor_type )
-       
+       console.log(response)
   }
   
 }
@@ -140,12 +140,12 @@ function Login() {
                     <div className="react-tab-content text-center">
                       <div className={`react-tab-pane ${active === 0 ? 'show' : ''}`}>
                         {/* <form> */}
-                          <div class="mb-3 mt-4">
-                            <label for="exampleInputEmail1" class=" border px-2 mx-2 "> {logindata.dialing_code} </label>
+                          <div className="mb-3 mt-4">
+                            <label for="exampleInputEmail1" className=" border px-2 mx-2 "> {logindata.dialing_code} </label>
                             <input type="text" onChange={valueonchange} disabled={disableinput} name='phone' value={logindata.phone} id="" />
                           </div>
 
-                          <div class="mb-3" style={{ display: showcode ? "flex" : "none" }}>
+                          <div className="mb-3 mt-4 m-auto justify-content-center" style={{ display: showcode ? "flex" : "none" }}>
                             <label >Code : </label> &nbsp; &nbsp;
                             <div><input type="password" name='otp' onChange={valueonchange} value={logindata.otp} /></div>
                             <div style={{display : errormessage ? "flex" : "none"}}>
@@ -157,30 +157,30 @@ function Login() {
  
 
                           <div>
-                          { showcode == true ? <button onClick={otpevent} type="submit" class="btn text-white bg-black" > Verify </button> :  <button onClick={loginevent} type="submit" class="btn text-white bg-black" >Submit</button> }
+                          { showcode == true ? <button onClick={otpevent} type="submit" className="btn text-white bg-black" > Verify </button> :  <button onClick={loginevent} type="submit" className="btn text-white bg-black" >Submit</button> }
                           </div>
 
                           <div className='text-center'> <a href=""><small> Forget Your Password?</small></a></div>
                           <div className='my-3'>
-                            <h5 class="background"><span> or </span></h5>
+                            <h5 className="background"><span> or </span></h5>
                           </div>
                           <div className='text-center'> <a href=""><small> <Link to='/signup' > Sign Up ? </Link></small></a></div>
                         {/* </form> */}
                       </div>
                       <div className={`react-tab-pane ${active === 1 ? 'show' : ''}`}>
                         {/* <form> */}
-                          <div class="mb-3 mt-4">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" name='email' onChange={by_email} value={emaillogin.email} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                          <div className="mb-3 mt-4">
+                            <label for="exampleInputEmail1" className="form-label">Email address</label>
+                            <input type="email" name='email' onChange={by_email} value={emaillogin.email} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                           </div>
-                          <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" name='password' onChange={by_email} value={emaillogin.password} class="form-control" id="exampleInputPassword1" />
+                          <div className="mb-3">
+                            <label for="exampleInputPassword1" className="form-label">Password</label>
+                            <input type="password" name='password' onChange={by_email} value={emaillogin.password} className="form-control" id="exampleInputPassword1" />
                           </div>
-                          <button type="submit" onClick={loginwithemail} class="btn text-white bg-black" >Submit</button>
+                          <button type="submit" onClick={loginwithemail} className="btn text-white bg-black" >Submit</button>
                           <div className='text-center'> <a href=""><small> Forget Your Password?</small></a></div>
                           <div className='my-3'>
-                            <h5 class="background"><span> or </span></h5>
+                            <h5 className="background"><span> or </span></h5>
                           </div>
                           <div className='text-center'> <a href=""><small> <Link to='/signup' > Sign Up ? </Link></small></a></div>
                         {/* </form> */}

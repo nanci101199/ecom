@@ -9,15 +9,18 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-function Trandingproduct() {
+
+function Featureproduct() {
 
  // const [sheindata, setSheindata] = useState([])
  const access_token = sessionStorage.getItem('accesstoken')
  const [trandingproduct, setTrandingproduct] = useState([])
  const [wishlisttrendproduct, setWishlisttrendproduct] = useState()
  const [addtowish, setAddtowish] = useState()
-
+ const [addtocarttopproduct, setAddtocartarttopproduct] = useState()
+ 
   useEffect(() => {
    axios .get(`${serve.details}trending-product`)
    .then((respo) => {
@@ -55,7 +58,29 @@ function Trandingproduct() {
         }
     };
 
-    const navigate = useNavigate()
+    const user_id = sessionStorage.getItem('user_id')
+    const addtocart = (ele) => {
+
+        let _formdata = new FormData();
+        _formdata.append('product_id', ele.id)
+        _formdata.append('vendor_id',ele.user_id)
+        _formdata.append('quantity',ele.parent_cat_id)
+        _formdata.append('orignal_price', ele.price)
+        _formdata.append('offer_price',ele.offer_price)
+        _formdata.append('session_id',user_id)
+        // _formdata.append('product_option')
+             axios.post(`${servepratham.apidata}user/cart/save`, _formdata, {
+                headers: {
+                  'Authorization' : `Bearer ${access_token}`,
+                }})
+            .then((response) => {
+                setAddtocartarttopproduct(response?.data.data.data);
+              console.log(response.data.data.data);
+            //   console.log(response) 
+              
+            })
+            .catch((error) => console.error("error"));
+    }
 
     const Addwishlist = (elem) => {
         let _formdata = new FormData();
@@ -77,9 +102,9 @@ function Trandingproduct() {
         typeof tranding !==  undefined && 
         <div className="App my-2 my-5 mx-5">
             <div className="d-flex justify-content-between my-4">
-           <div className="fs-3 ">
-               Tranding Product
-            </div>
+            <div className="fs-3 ">
+                    Tranding Product
+                </div>
             <div >   
                 <button className="p-2" > <RemoveRedEyeIcon/> View All </button>
             </div>
@@ -94,6 +119,9 @@ function Trandingproduct() {
                             <div className="d-flex justify-content-between">
                             <div className="text-left"> USD${carousels.offer_price} <span className="text-danger text-decoration-line-through"> USD${carousels.price}</span></div>
                             <div className="mx-3" onClick={() => Addwishlist(carousels.id)}><FavoriteBorderIcon/></div></div>
+                            <div className="hideelement">
+                            <button onClick={() =>addtocart(carousels) } className="positionbutton" style={{position:"absolute", bottom:"30%", left:"22%"}}> <AddShoppingCartIcon/> Add to cart</button>
+                        </div>
                         </div>
                         
                     </div>
@@ -104,4 +132,4 @@ function Trandingproduct() {
         </div>
     );
 }
-export default Trandingproduct
+export default Featureproduct
