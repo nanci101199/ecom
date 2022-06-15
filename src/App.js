@@ -10,7 +10,7 @@ import Showitems from './secondary/Showitems';
 import About from './components/Footer/About';
 import Responsibility from './components/Footer/Responsibility';
 import Return from './components/Footer/Return';
-import Showproduct from './components/Home/Showproduct'
+
 import Sharebybutton from './secondary/Sharebybutton';
 import SheinPics from './secondary/SheinPics';
 import ShowBrandwide from './secondary/ShowBrandwide';
@@ -26,6 +26,9 @@ import {servepratham} from './config/AppConfig'
 import axios from 'axios';
 import AddtoCart from './components/Profile/AddtoCart';
 import Productdetails from './components/Productdetails';
+import ViewAll from './components/ViewAll';
+import Viewcategory from './components/Home/Viewcategory'
+import Shopbycategory from './components/Home/Shopbycategory';
 
 function App() {
 
@@ -49,15 +52,14 @@ function App() {
     
        <Header headdata={sarvapratham} />
       <Routes>
-        <Route path='/' element={<Login/>}/>
+        <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
-        <Route exact path='/home'  element={ <Home/>}/>
+        <Route exact path='/'  element={ <Home/>}/>
         <Route path='/CategorySub' element={ <CategorySub/>} />
         <Route path='/Showitems/:id' element={<Showitems/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/responsibility' element={<Responsibility/>}/>
         <Route path='/return' element={<Return/>}/>
-        <Route path='/showproduct' element={<Showproduct/>}/>
         <Route path='/Sharebybutton' element={<Sharebybutton/>}/>
         <Route path='/sheinpics' element={<SheinPics/>}/>
         <Route path='/Showsheinpics' element={<Showsheinpics/>}/>
@@ -68,11 +70,15 @@ function App() {
         <Route path='/account' element={<Myaccount/>}/>
         <Route path='/chat' element={<Mychat/>}/>
         <Route path='/addtocart' element={<AddtoCart/>} />
-        <Route path='/productdetail' element={<Productdetails/>} />
+        <Route path='/productdetail/:id' element={<Productdetails/>} />
+        <Route path='/viewall/:type' element={<ViewAll Viewall={sarvapratham} />}/>
+        <Route path='/shopbtcategory/:cid/:cname' element={<Shopbycategory />}/>
+        <Route path='/viewcategory/:cid/:cname' element={<Viewcategory viewcategory={sarvapratham} />}/>
       </Routes>
       <Footer/> 
     </>
   );
 }
+
 
 export default App;

@@ -40,37 +40,6 @@ function Sheincampign() {
                 </button>
             </div>
         </div>
-    <div> 
-        <div className='my-2 mx-5'>
-            <div id="carouselExampleControls1" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <img src="https://img.ltwebstatic.com/images3_ach/2022/05/17/165275394187a2bf23be12ba0f7c06fc16625d657c.jpg" className="d-block w-100" alt="..." />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://img.ltwebstatic.com/images3_ach/2022/05/16/16526799419163090c3d91d8da43c945e83ea26216.jpg" className="d-block w-100" alt="..." />
-                    </div>
-                    <div className="carousel-item active">
-                        <img src="https://img.ltwebstatic.com/images3_ach/2022/04/07/16493260120c3564df1ba2df62a2c6191858dea74e.jpg" className="d-block w-100" alt="..." />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://img.ltwebstatic.com/images3_ach/2022/05/07/1651892977239ff9b9a145b8f4bdddca256139f774.jpg" className="d-block w-100" alt="..." />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://img.ltwebstatic.com/images3_ach/2022/05/23/1653272086d8e187eb50b68e30567a6ee60772df87.jpg" className="d-block w-100" alt="..." />
-                    </div>
-                </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </div>
     
     </>
   )

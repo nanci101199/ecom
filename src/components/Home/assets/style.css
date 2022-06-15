@@ -27,10 +27,10 @@ div::-webkit-scrollbar {
   margin-right: 12px;
 }
 
-/* .hideelement{
+ .hideelement{
   display: none;
-}
- .cardproduct:hover .hideelement{
+} 
+ .imagehover:hover .hideelement{
    display: flex;
    z-index: 47587;
- } */
+ } 

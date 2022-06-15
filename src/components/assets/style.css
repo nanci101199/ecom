@@ -16,10 +16,6 @@
     width: 100%;
 }
 
-/* body{
-    background-image: linear-gradient(to right, rgb(255,19,20), rgb(255,127,8));
-} */
-
 a {
     color: black!important;
     text-decoration: none;
@@ -30,3 +26,4 @@ div::-webkit-scrollbar {
 .css-13xfq8m-MuiTabPanel-root {
     padding: 17px!important;
 }
+

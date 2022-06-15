@@ -3,7 +3,7 @@ import { ReactDOM, useState } from 'react';
 import '../Home/assets/sign.css'
 import {Link, Navigate, useNavigate} from 'react-router-dom'
 import axios from 'axios';
-import { Appdata } from '../../config/AppConfig';
+import { servepratham } from '../../config/AppConfig';
 
 function Signup() {
 
@@ -37,11 +37,12 @@ function Signup() {
     _formdata.append('dialing_code', signupdata.dialing_code)
     _formdata.append('phone', signupdata.phone)
 
-    await axios.post(`${Appdata.api}user-signup`, _formdata)
+    await axios.post(`${servepratham.apidata}user-signup`, _formdata)
       .then((response) => {
         console.log(response)
         setEmailcode(response.data.data.user.otp)
         setShowcode(true)
+        console.log(response.data.data.user.otp)
       })
   }
 
@@ -54,7 +55,7 @@ function Signup() {
     _formdata.append('phone', signupdata.phone)
     _formdata.append('otp', signupdata.otp )
      
-    await axios.post(`${Appdata.api}otp/verify`, _formdata)
+    await axios.post(`${servepratham.apidata}otp/verify`, _formdata)
     .then((response) => {
       if(signupdata.otp ===  emailcode){
         const otp = response.data.data.user.otp
@@ -72,52 +73,53 @@ function Signup() {
 
   return (
     <>
-      <div className='' style={{ backgroundImage: 'url(https://t3.ftcdn.net/jpg/03/55/60/70/360_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg)' }}>
-        <div className='row my-5'>
-          <div className=' col-6 m-auto'>
+      <div className='' style={{ backgroundImage: 'url(http://chitrahandicraft.com/wp-content/uploads/2019/02/login-page-background-images-hd-10.jpg)'}}>
+        <div className='row '>
+          <div className=' col-lg-6 col-md-8 col-11 p-5 my-5 m-auto bg-light  bg-opacity-50' style={{  borderRadius:"12px" }}>
             <div className="row m-0 justify-content-lg-start justify-content-center">
-              <div className=" col-12 mt-5 mb-5">
-                <div className='fs-3 fw-bold text-center'>New To Shein</div>
+              <div className=" col-12 ">
+                <div className='fs-4 text-center'>New To Shein</div>
                 <div className="form-area">
                   <div className="form-inner text-center ">
                     
-                   <div className='fw-bolder fs-5'>  <a className="react-tab-link " id="0">Sign Up</a></div>
+                   <div className='fs-1 fw-bold text-center'>  <a className="react-tab-link " id="0">Sign Up</a></div>
                      
                    
                     <div className="react-tab-content">
                       <div className='text-center'>
+                        <div className="mb-3 mt-4">
+                          <label for="exampleInputName1" className="  p-2  mx-2 rounded" style={{border:" 1px solid grey"}}> Name </label>
+                          <input type="text" name='name'  id='name' onChange={signupchangedata} className='inputcontrol' value={signupdata.name}  />
+                        </div>
+                        <div className="mb-3 mt-4">
+                          <label for="exampleInputEmail1" className="  p-2 mx-2 rounded "  style={{border:" 1px solid grey"}}> Email </label>
+                          <input type="email" name='email' id='email'  onChange={signupchangedata} className='inputcontrol' value={signupdata.email}  />
+                        </div>
+                        <div className="mb-3 mt-4">
+                          <label for="exampleInputPassword1"  className="  p-2 mx-2 rounded "  style={{border:" 1px solid grey"}}> Password</label>
+                          <input type="password" name='password' id='password' onChange={signupchangedata} className='inputcontrol'  value={signupdata.password}  />
+                        </div>
+                        <div className="mb-3 mt-4">
+                          <label for="exampleInputEmail1"  name='dialing_code' className=" rounded p-2 mx-2 "  style={{border:" 1px solid grey"}}> {signupdata.dialing_code} </label>
+                          <input type="text" name='phone' id='phone' onChange={signupchangedata} className='inputcontrol' value={signupdata.phone}  />
+                        </div>
 
-                        <div class="mb-3 mt-4">
-                          <label for="exampleInputName1" class=" border px-2 mx-2 "> Name </label>
-                          <input type="text" name='name' onChange={signupchangedata} value={signupdata.name} id="" />
-                        </div>
-                        <div class="mb-3 mt-4">
-                          <label for="exampleInputEmail1" class=" border px-2 mx-2 "> Email </label>
-                          <input type="email" name='email' onChange={signupchangedata} value={signupdata.email} id="" />
-                        </div>
-                        <div class="mb-3 mt-4">
-                          <label for="exampleInputPassword1" class=" border px-2 mx-2 "> Password</label>
-                          <input type="password" name='password' onChange={signupchangedata} value={signupdata.password} id="" />
-                        </div>
-                        <div class="mb-3 mt-4">
-                          <label for="exampleInputEmail1" name='dialing_code' class=" border px-2 mx-2 "> {signupdata.dialing_code} </label>
-                          <input type="text" name='phone' onChange={signupchangedata} value={signupdata.phone} id="" />
-                        </div>
+                        
+                        { showcode == true ? "" :  <button onClick={createaccount} type="submit" className="btn text-white bg-black">Register</button> }
 
-                        <hr />
-                        { showcode == true ? "" :  <button onClick={createaccount} type="submit" class="btn text-white bg-black">Register</button> }
-
-                         <div class="mb-3 mt-4">
-                         { showcode == true ? <> <label for="Otp" class=" border px-2 mx-2 "> One time password</label>
-                          <input type="password" name='otp' onChange={signupchangedata} value={signupdata.otp} id="" /> </> : ""}
+                         <div className="mb-3 mt-4">
+                         { showcode == true ? <> <label for="Otp" className=" border px-2 mx-2 "> One time password</label>
+                          <input type="password" name='otp' onChange={signupchangedata} value={signupdata.otp}  /> </> : ""}
                         </div>
-                        { showcode == true ? <button onClick={otpeventemail} type="submit" class="btn text-white bg-black" style={{ width: " -webkit-fill-available" }}> Verify </button> : ""}
+                        { showcode == true ? <button onClick={otpeventemail} type="submit" className="btn text-white bg-black" style={{ width: " -webkit-fill-available" }}> Verify </button> : ""}
                         <div style={{display : error ? "flex" : "none", color:"red"}}>
                           Enter Valid Code
                         </div>
-
+                        <div className='my-3'>
+                          <h5 className="background"><span> or </span></h5>
+                        </div>
                         <div>
-                          Already registered ? <Link to='/' >Login</Link>
+                          Already registered ? <Link to='/login' > <button className='btn'> Login </button></Link>
                         </div>
                       </div>
                       

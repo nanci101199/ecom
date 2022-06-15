@@ -8,6 +8,7 @@ import axios from "axios";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Link } from "react-router-dom";
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
@@ -17,6 +18,7 @@ function Featureproduct() {
  // const [sheindata, setSheindata] = useState([])
  const access_token = sessionStorage.getItem('accesstoken')
  const [trandingproduct, setTrandingproduct] = useState([])
+ const [addtocarts, setAddtocartart] = useState()
  const [wishlisttrendproduct, setWishlisttrendproduct] = useState()
  const [addtowish, setAddtowish] = useState()
  const [addtocarttopproduct, setAddtocartarttopproduct] = useState()
@@ -59,27 +61,13 @@ function Featureproduct() {
     };
 
     const user_id = sessionStorage.getItem('user_id')
-    const addtocart = (ele) => {
+    const navigate = useNavigate()
 
-        let _formdata = new FormData();
-        _formdata.append('product_id', ele.id)
-        _formdata.append('vendor_id',ele.user_id)
-        _formdata.append('quantity',ele.parent_cat_id)
-        _formdata.append('orignal_price', ele.price)
-        _formdata.append('offer_price',ele.offer_price)
-        _formdata.append('session_id',user_id)
-        // _formdata.append('product_option')
-             axios.post(`${servepratham.apidata}user/cart/save`, _formdata, {
-                headers: {
-                  'Authorization' : `Bearer ${access_token}`,
-                }})
-            .then((response) => {
-                setAddtocartarttopproduct(response?.data.data.data);
-              console.log(response.data.data.data);
-            //   console.log(response) 
-              
-            })
-            .catch((error) => console.error("error"));
+
+    const addtocart = (ele) => {
+        console.log(ele)
+        navigate(`/productdetail/${ele}`)
+     
     }
 
     const Addwishlist = (elem) => {
@@ -98,6 +86,10 @@ function Featureproduct() {
         .catch((error) => console.error("error"));
     } 
 
+    const ViewAllfun = () => {
+        navigate('/viewall/trending-product') 
+    }
+
     return (
         typeof tranding !==  undefined && 
         <div className="App my-2 my-5 mx-5">
@@ -106,21 +98,21 @@ function Featureproduct() {
                     Tranding Product
                 </div>
             <div >   
-                <button className="p-2" > <RemoveRedEyeIcon/> View All </button>
+                <button className="p-2" onClick={ViewAllfun}> <Link to='/viewall' > <RemoveRedEyeIcon/> View All</Link> </button>
             </div>
            </div>
             <div className=" mb-5" style={{ position: "relative" }}>
                <Carousel responsive={responsive}>
                     {trandingproduct.map((carousels) => (
                         <div>
-                        <div className="card ">
+                        <div className="card " onClick={() =>addtocart(carousels.id) }>
                             <img className="card-img-top imagehover" src={carousels.ImageSrc} style={{width:"95%", height:"30%"}} alt={carousels.ImageSrc} />
                             <div className="text">{carousels.product_name}</div>
                             <div className="d-flex justify-content-between">
                             <div className="text-left"> USD${carousels.offer_price} <span className="text-danger text-decoration-line-through"> USD${carousels.price}</span></div>
                             <div className="mx-3" onClick={() => Addwishlist(carousels.id)}><FavoriteBorderIcon/></div></div>
                             <div className="hideelement">
-                            <button onClick={() =>addtocart(carousels) } className="positionbutton" style={{position:"absolute", bottom:"30%", left:"22%"}}> <AddShoppingCartIcon/> Add to cart</button>
+                            <button onClick={() =>addtocart(carousels.id) } className="positionbutton" style={{position:"absolute", bottom:"30%", left:"22%"}}> More Details </button>
                         </div>
                         </div>
                         

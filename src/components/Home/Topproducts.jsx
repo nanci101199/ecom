@@ -16,6 +16,7 @@ function Topproducts({feature}) {
  const [topproduct, setTopproduct] = useState([])
  const [wishlisttopproduct, setWishlisttopproduct] = useState()
  const [addtocarttopproduct, setAddtocartarttopproduct] = useState()
+ const [addtocarts, setAddtocartart] = useState()
  const access_token = sessionStorage.getItem('accesstoken')
 const user_id = sessionStorage.getItem('id')
   useEffect(() => {
@@ -28,9 +29,6 @@ const user_id = sessionStorage.getItem('id')
    })
    .catch((error) => console.error("error"));
   }, [])
-
-
-
 
     const responsive = {
         superLargeDesktop5: {
@@ -62,9 +60,8 @@ const user_id = sessionStorage.getItem('id')
     const navigate = useNavigate()
 
     const clickbuttondeatils  = (ele) => {
-        const itemno = ele
-        console.log(itemno)
-        navigate('/showproduct', {state:ele})
+       
+        navigate('/viewall/top-product')
     }
 
     const Addwishlist = (elem) => {
@@ -83,27 +80,12 @@ const user_id = sessionStorage.getItem('id')
             })
             .catch((error) => console.error("error"));
     } 
+
     const addtocart = (ele) => {
 
-        let _formdata = new FormData();
-        _formdata.append('product_id', ele.id)
-        _formdata.append('vendor_id',ele.user_id)
-        _formdata.append('quantity',ele.parent_cat_id)
-        _formdata.append('orignal_price', ele.price)
-        _formdata.append('offer_price',ele.offer_price)
-        _formdata.append('session_id',user_id)
-        // _formdata.append('product_option')
-             axios.post(`${servepratham.apidata}user/cart/save`, _formdata, {
-                headers: {
-                  'Authorization' : `Bearer ${access_token}`,
-                }})
-            .then((response) => {
-                setAddtocartarttopproduct(response?.data.data.data);
-              console.log(response.data.data.data);
-            //   console.log(response) 
-              
-            })
-            .catch((error) => console.error("error"));
+        navigate(`/productdetail/${ele}`)
+       
+
     }
 
     return (
@@ -121,14 +103,14 @@ const user_id = sessionStorage.getItem('id')
                  <Carousel responsive={responsive}>
                     {topproduct.map((carousels) => (
                         <div>
-                        <div className="card cardproduct">
+                        <div className="card cardproduct" onClick={() =>addtocart(carousels.id)}>
                             <img className="card-img-top imagehover" src={carousels.ImageSrc} style={{width:"95%", height:"30%"}} alt={carousels.ImageSrc} />
                             <div className="text">{carousels.product_name}</div>
                             <div className="d-flex justify-content-between"> <div className="text-start">USD ${carousels.offer_price} <span className="text-danger text-decoration-line-through"> USD${carousels.price}</span></div>
                             <div className="mx-3" onClick={() =>Addwishlist(carousels.id)}><FavoriteBorderIcon/></div></div>
                         </div>
                         <div className="hideelement">
-                            <button onClick={() =>addtocart(carousels) } className="positionbutton" style={{position:"absolute", bottom:"30%", left:"22%"}}> <AddShoppingCartIcon/> Add to cart</button>
+                            <button onClick={() =>addtocart(carousels.id) } className="positionbutton" style={{position:"absolute", bottom:"30%", left:"22%"}}> <AddShoppingCartIcon/> Add to cart</button>
                         </div>
                     </div>
                     ))}

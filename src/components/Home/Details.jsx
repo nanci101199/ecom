@@ -1,31 +1,57 @@
 import React from 'react'
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import ForumIcon from '@mui/icons-material/Forum';
+import KeyboardIcon from '@mui/icons-material/Keyboard';
 
 function Details() {
   return (
-    <>
-      <div>
-        <div className='row'>
-          <div className='col-9 mx-auto'>
-            <div class="card text-center">
-              <div class="card-header">
-                Featured
-              </div>
-              <div>
-                <img src="/" alt="" />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-              <div class="card-footer text-muted">
-                2 days ago
-              </div>
-            </div>
-          </div>
+   <>
+   <div className='row m-5'>
+    <div className='col-lg-3 col-md-6 col-12 p-3 text-center' style={{ boxShadow: " 5px 10px 8px #888888" }}>
+        <div>
+            <LocalShippingIcon/>
         </div>
-      </div>
-    </>
+        <div>FREE SHIPPING & RETURN</div>
+        <div>
+        Free shipping on all US orders
+        </div>
+    </div>
+    <div className='col-lg-3 col-md-6 col-12 p-3 text-center' style={{ boxShadow: " 5px 10px 8px #888888" }}>
+        <div>
+            <AttachMoneyIcon/>
+        </div>
+        <div>
+        MONEY GUARANTEE
+        </div>
+        <div>
+        30 days money back guarantee
+        </div>
+    </div>
+    <div className='col-lg-3 col-md-6 col-12 p-3 text-center' style={{ boxShadow: " 5px 10px 8px #888888" }}>
+        <div>
+            <ForumIcon/>
+        </div>
+        <div>
+        ONLINE SUPPORT
+        </div>
+        <div>
+        We support online 24/7 on day
+        </div>
+    </div>
+    <div className='col-lg-3 col-md-6 col-12 p-3 text-center' style={{ boxShadow: " 5px 10px 8px #888888" }}>
+        <div>
+            <KeyboardIcon/>
+        </div>
+        <div>
+        SECURE PAYMENTS
+        </div>
+        <div>
+        All payment are Secured and trusted.
+        </div>
+    </div>
+   </div>
+   </>
   )
 }
 

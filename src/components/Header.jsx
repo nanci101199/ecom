@@ -4,7 +4,7 @@ import { styled, alpha } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -22,6 +22,8 @@ import './assets/style.css'
 import TabContext from '@mui/lab/TabContext';
 import { servepratham } from '../config/AppConfig';
 import axios from 'axios';
+import MenuIcon from '@mui/icons-material/Menu';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
 
@@ -83,32 +85,37 @@ function Header({ headdata }) {
         setAnchorElUser(null);
     };
 
-
-    const [value, setValue] = useState(1);
+    const navigate = useNavigate()
+    const [value, setValue] = useState();
     const handleclick = (ele) => {
-        setValue(ele)
-        console.log(value)
+        setValue(ele.id)
+        console.log(ele)
+        navigate(`/viewcategory/${ele.id}/${ele.name}`)
     }
 
- 
+    const logOut = () => {
+        sessionStorage.clear()
+    }
+
 
 
     return (
         <>
             <div className='' style={{ width: "99%" }}>
-                <div className=' row bg-light' >
-                    <div className=' col-lg-2 col-12 fs-1 fw-bold text-center'> <Link to='/home'> SHEIN </Link> </div>
-                    <div className=' col-lg-7 col-12 m-auto my-2 justify-content-center' style={{ flexWrap: "nowrap", overflow: "scroll" }}>
+                <div className=' row bg-light ' >
+                    <div className='d-lg-none d-flex m-auto px-5 col-4' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"> <MenuIcon fontSize='large' /> </div>
+                    <div className=' col-lg-2 col-4 fs-1 fw-bold text-center m-auto'> <Link to='/'> SHEIN </Link> </div>
+                    <div className=' col-lg-7 col-4 m-auto my-2 justify-content-center d-lg-flex d-none' style={{ flexWrap: "nowrap", overflow: "scroll" }}>
                         <Box sx={{ width: '100%', typography: 'body1' }}>
                             <TabContext value={value} style={{}}>
                                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                    <div className='justify-content-center'>
-                                    <TabList aria-label="lab API tabs example">
-                                        {headdata?.map((data) => (
-                                            <Tab onClick={() => handleclick(data.id)} label={data.name} value={data.id} />
-                                        ))}
+                                    <div className=' d-flex justify-content-center' style={{ flexWrap:"nowrap", overflow:"scroll"}}>
+                                        <TabList aria-label="lab API tabs example">
+                                            {headdata?.map((data) => (
+                                                <Tab onClick={() => handleclick(data)} label={data.name} value={data.id} />
+                                            ))}
 
-                                    </TabList>
+                                        </TabList>
                                     </div>
                                 </Box>
                                 <div className='d-flex w-auto justify-content-center' style={{ flexWrap: "nowrap", overflow: "scroll" }}>
@@ -122,7 +129,7 @@ function Header({ headdata }) {
                         </Box>
                     </div>
 
-                    <div className='col-lg-3 col-12 text-lg-end text-center my-auto d-flex justify-content-lg-end justify-content-center mr-3'>
+                    <div className='col-lg-3 col-4 text-end  m-auto d-flex justify-content-lg-end justify-content-center ' style={{ alignItems: "center" }}>
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <div onClick={handleOpenUserMenu} className='mx-1'><PersonOutlineIcon /></div>
@@ -143,43 +150,79 @@ function Header({ headdata }) {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                <MenuItem key='login' onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center"> <Link to='/'> Login </Link></Typography>
-                                </MenuItem>
+                               
 
-                                {acccesstoken !== null ? <MenuItem key='Accounts' onClick={handleCloseUserMenu}> <Typography textAlign="center"> <Link to='/account'> Account</Link></Typography>  </MenuItem> : ""}
-
-
-                                {acccesstoken !== null ? <MenuItem key='Wishlist' onClick={handleCloseUserMenu}>
+                                {acccesstoken !== null ?
+                                <>
+                                 <MenuItem key='Accounts' onClick={handleCloseUserMenu}> <Typography textAlign="center"> <Link to='/account'> Account</Link></Typography>  </MenuItem> 
+                                 <MenuItem key='Wishlist' onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center"> <Link to='/wishlist'> Wishlist </Link> </Typography>
-                                </MenuItem> : ""}
-
-                                {acccesstoken !== null ? <MenuItem key='chat' onClick={handleCloseUserMenu}>
+                                </MenuItem>
+                                <MenuItem key='chat' onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center"> <Link to='/chat'> My Chat </Link> </Typography>
-                                </MenuItem> : ""}
-                                {acccesstoken !== null ? <MenuItem key='chat' onClick={handleCloseUserMenu}>
+                                </MenuItem>
+                                <MenuItem key='chat' onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center"> <Link to='/addtocart'> My Cart </Link> </Typography>
-                                </MenuItem> : ""}
+                                </MenuItem>
+                                <MenuItem key='chat' onClick={logOut}>
+                                    <Typography textAlign="center"> LogOut </Typography>
+                                </MenuItem>
+                                 </>
+                                 :
+                                 <MenuItem key='login' onClick={handleCloseUserMenu}>
+                                 <Typography textAlign="center"> <Link to='/login'> Login </Link></Typography>
+                                </MenuItem>
+                                }
 
                             </Menu>
                         </Box>
 
 
-                        <div className='mx-1'><LocalMallIcon /></div>
+                        <div className='mx-1'><Link to='/addtocart'> <LocalMallIcon /> </Link></div>
                         <div className='mx-1'> <Link to='/wishlist'> <FavoriteBorderIcon /></Link></div>
-                        <div className='mx-1'><HeadsetMicIcon /></div>
-                        <div className='mx-1'><LanguageIcon /></div>
-                        <br />
-                        <br />
-                        <br />
-                       <div>
-                        {/* <Search>
+                        <div>
+                            {/* <Search>
                             <SearchIcon />
                             <StyledInputBase
                                 placeholder="Search…"
                                 inputProps={{ 'aria-label': 'search' }}/>
                         </Search> */}
                         </div>
+                    </div>
+                </div>
+                <div className="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div className="offcanvas-header">
+                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div className="offcanvas-body">
+                        <Box sx={{ width: '100%', typography: 'body1' }}>
+                            <TabContext value={value}>
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                    <div className='justify-content-center'  >
+                                        <TabList aria-label="lab API tabs example">
+                                            {headdata?.map((data) => (
+                                                <Tab onClick={() => handleclick(data)} label={data.name} value={data.id} />
+                                            ))}
+
+                                        </TabList>
+                                    </div>
+                                </Box>
+                                <div className=' w-auto ' style={{ flexWrap: "nowrap", overflow: "scroll" }}>
+                                    {headdata?.map((data) => (
+                                        data.id == value ?
+                                            data.childrens.map((childdata) => (
+                                                <div class="card my-2">
+                                                    <div class="card-body d-flex justify-content-between">
+                                                        <div className=' p-1' value={value}> <small>{childdata.name} </small></div>
+                                                        <div><ArrowForwardIosIcon/></div>
+                                                    </div>
+                                                </div>
+
+                                            )) : ""))}
+                                    
+                                </div>
+                            </TabContext>
+                        </Box>
                     </div>
                 </div>
             </div>

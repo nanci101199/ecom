@@ -9,6 +9,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import StarIcon from '@mui/icons-material/Star';
+
 
 
 function Featureproduct() {
@@ -16,7 +18,7 @@ function Featureproduct() {
  // const [sheindata, setSheindata] = useState([])
  const access_token = sessionStorage.getItem('accesstoken')
  const [featureproduct, setFeatureproduct] = useState([])
- const [addtocarttopproduct, setAddtocartarttopproduct] = useState()
+ const [addtocarts, setAddtocartart] = useState()
  const [wishlisttrendproduct, setWishlisttrendproduct] = useState()
  const [addtowish, setAddtowish] = useState()
 
@@ -62,17 +64,8 @@ function Featureproduct() {
 
     const addtocart = (ele) => {
 
-        // _formdata.append('product_option')
-             axios.get(`${servepratham.apidata}user/productById/${ele.id}`, {
-                headers: {
-                  'Authorization' : `Bearer ${access_token}`,
-                }})
-            .then((response) => {
-                setAddtocartarttopproduct(response?.data.data.data);
-                navigate('/productdetail', {state:ele, data:addtocarttopproduct})
-              
-            })
-            .catch((error) => console.error("error"));
+    navigate(`/productdetail/${ele}`)
+          
     }
 
     const Addwishlist = (elem) => {
@@ -91,6 +84,10 @@ function Featureproduct() {
         .catch((error) => console.error("error"));
     } 
 
+    const featureonclick = () => {
+        navigate('/viewall/featured-product') 
+    }
+
     return (
         typeof tranding !==  undefined && 
         <div className="App my-2 my-5 mx-5">
@@ -99,22 +96,30 @@ function Featureproduct() {
                Feature Product
             </div>
             <div >   
-                <button className="p-2" > <RemoveRedEyeIcon/> View All </button>
+                <button className="p-2" onClick={featureonclick}> <RemoveRedEyeIcon/> View All </button>
             </div>
            </div>
             <div className=" mb-5" style={{ position: "relative" }}>
                <Carousel responsive={responsive}>
                     {featureproduct.map((carousels) => (
                         <div>
-                        <div className="card ">
-                            <img className="card-img-top imagehover" src={carousels.ImageSrc} style={{width:"95%", height:"30%"}} alt={carousels.ImageSrc} />
-                            <div className="text">{carousels.product_name}</div>
+                        <div className="card " onClick={() =>addtocart(carousels.id) }>
+                            <img className="card-img-top text-center m-auto imagehover" src={carousels.ImageSrc} style={{width:"90%", height:"30%"}} alt={carousels.ImageSrc} />
+                            <div className="text text-start"> <small>{carousels.product_name}</small></div>
                             <div className="d-flex justify-content-between">
-                            <div className="text-left"> USD${carousels.offer_price} <span className="text-danger text-decoration-line-through"> USD${carousels.price}</span></div>
-                            <div className="mx-3" onClick={() => Addwishlist(carousels.id)}><FavoriteBorderIcon/></div></div>
+                            <div className="text-left my-2"> USD${carousels.offer_price} <span className="text-danger text-decoration-line-through"> USD${carousels.price}</span></div>
+                            
+                            <div className="mx-3" onClick={() => Addwishlist(carousels.id)}><FavoriteBorderIcon/></div>
+                            </div>
+                            <div> 
+                                <button className=' btn  btn-sm rounded-pill '> 
+                                 <StarIcon style={{ color: "green" }} />{carousels.rating}
+                                 </button>
+                            </div>
+                           
                         </div>
                         <div className="hideelement">
-                            <button onClick={() =>addtocart(carousels) } className="positionbutton" style={{position:"absolute", bottom:"30%", left:"22%"}}> <AddShoppingCartIcon/> Add to cart</button>
+                            <button onClick={() =>addtocart(carousels.id) } className="positionbutton" style={{position:"absolute", bottom:"30%", left:"22%"}}> <AddShoppingCartIcon/> More Details</button>
                         </div>
                     </div>
                     ))}

@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 function Imformation() {
     return (
         <>
-            <div>
+            <div className='my-2'>
                 <div className='row mx-5 py-3 bg-light'>
                     <div className='col-lg-3 col-6 text-center border-end border-dark ' >
                         <a className='text-decoration-none text-black' href=""> <Link to='/trail'> <RvHookupIcon/>    &nbsp; FREE TRAIL </Link> </a>
